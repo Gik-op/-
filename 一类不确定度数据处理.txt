@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    double number;
+    printf("请输入你想要计算的数据个数：（ e for end ):\n");
+    while(scanf("%lf",&number))
+    {
+        getchar();
+        double sample[(int)number];
+        double sum=0,sum1=0,average,aim;
+        printf("请输入数据：\n");
+        for(int n=0;n<(int)number;n++)
+        {
+            printf("[%d]\t",n+1);
+            scanf("%lf",&sample[n]);
+            sum=sum+sample[n];
+        }
+        average=sum/number;
+        printf("数据平均值为：%lf\n",average);
+        printf("如果需要对平均值位数进行修正，请输入修正后的数据\n如不需要，输入任一字母：\n");
+        double correct;
+        if(scanf("%lf",&correct))
+        {
+            average=correct;
+        }
+        for(int n=0;n<(int)number;n++)
+        {
+            sum1=sum1+pow(sample[n]-average,2);
+        }
+        aim=sqrt(sum1/(number*(number-1)));
+        printf("你需要的不确定度为：%lf\n",aim);
+        printf("请输入你想要计算的数据个数：（ e for end ):\n");
+    }
+    printf("感谢使用本程序\n");
+    return 0;
+}
