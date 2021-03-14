@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 256
+
+double Lcount(double arr1[MAX],double arr2[MAX],double a1,double a2,int n);
+
+int main()
+{
+    double number,lxx,lxy,sumx=0,sumy=0,k,b;
+    double numx[MAX],numy[MAX];
+    printf("本程序应用于最小二乘法计算线性规律。\n");
+    printf("请输入样本点个数：(e to end)\n");
+    while(scanf("%lf",&number))
+    {
+        getchar();
+        for(int n=0;n<(int)number;n++)
+        {
+            printf("x: y:\n");
+            scanf("%lf %lf",&numx[n],&numy[n]);
+            sumx+=numx[n];
+            sumy+=numy[n];
+        }
+        double averx,avery;
+        averx=sumx/number;
+        avery=sumy/number;
+        printf("x数据平均值为 %lf y数据平均值为 %lf\n",averx,avery);
+        lxy=Lcount(numx,numy,averx,avery,(int)number);
+        lxx=Lcount(numx,numx,averx,averx,(int)number);
+        k=lxy/lxx;
+        b=avery-k*averx;
+        printf("该组数据的k为：%lf\n该组数据的b为：%lf\n",k,b);
+        printf("\n请输入样本点个数：(e to end)\n");
+    }
+    printf("感谢您使用本程序！\n");
+    return 0;
+}
+
+double Lcount(double arr1[MAX],double arr2[MAX],double a1,double a2,int n)
+{
+    double sum=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=(arr1[i]-a1)*(arr2[i]-a2);
+    }
+    return sum;
+}
