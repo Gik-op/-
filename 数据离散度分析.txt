@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define MAX 256
+
+double Square(double arr[MAX],int n,double aver);
+
+int main()
+{
+    int number;
+    double data[MAX];
+    printf("该程序用于计算数据的离散程度\n请输入数据个数(输入 e 终止程序）：");
+    while(scanf("%d",&number))
+    {
+        double sum=0,average,aim;
+        getchar();
+        for(int i=0;i<number;i++)
+        {
+            printf("[%d]",i+1);
+            scanf("%lf",&data[i]);
+            sum+=data[i];
+        }
+        average=sum/(double)number;
+        aim=sqrt(Square(data,number,average));
+        printf("该组数据平均值为：%lf 标准差为：%lf\n",average,aim);
+        printf("\n该程序用于计算数据的离散程度\n请输入数据个数(输入 e 终止程序）：\n");
+    }
+    return 0;
+}
+
+double Square(double arr[MAX],int n,double aver)
+{
+    double squ;
+    for(int i=0;i<n;i++)
+    {
+        squ+=pow(arr[i]-aver,2);
+    }
+    return squ;
+}

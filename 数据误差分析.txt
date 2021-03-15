@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define MAX 256
+
+int main()
+{
+    int number;
+    double data[MAX];
+    printf("本程序用于实验误差分析\n请输入数据个数（输入e结束程序）：\n");
+    while(scanf("%d",&number))
+    {
+        double real,miss[MAX][2],average,sum=0;
+        printf("请输入标准值：");
+        scanf("%lf",&real);
+        printf("请输入数据：\n");
+        for(int i=0;i<number;i++)
+        {
+             printf("[%d]",i+1);
+             scanf("%lf",&data[i]);
+             miss[i][1]=data[i]-real;
+             sum+=miss[i][1];
+             miss[i][2]=fabs(miss[i][1]/real);
+        }
+        average=sum/(double)number;
+        printf("数据分析结果如下：\n");
+        printf("平均误差为 %lf\n",average);
+        int k=0;
+        for(int i=0;i<number;i++)
+        {
+             printf("[%d] %lf %lf\t",i+1,miss[i][1],miss[i][2]);
+             k++;
+             if(k%3==0)
+             {
+                 printf("\n");
+             }
+        }
+        printf("\n本程序用于实验误差分析\n请输入数据个数（输入e结束程序）：\n");
+    }
+    return 0;
+}
